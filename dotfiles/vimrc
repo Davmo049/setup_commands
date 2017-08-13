@@ -1,0 +1,9 @@
+
+set mouse=a
+set number
+
+nnoremap <left> <C-w><left>
+nnoremap <right> <C-w><right>
+nnoremap <up> <C-w><up>
+nnoremap <down> <C-w><down>
+

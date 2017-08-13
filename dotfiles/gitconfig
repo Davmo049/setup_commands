@@ -1,0 +1,17 @@
+[user]
+name = David Molin
+email = mohlin.david@gmail.com
+
+[alias]
+co = checkout
+ci = commit
+st = status
+
+[color]
+diff = auto
+status = auto
+branch = auto
+
+[core]
+excludesfile = ~/.gitignore
+editor = vim
