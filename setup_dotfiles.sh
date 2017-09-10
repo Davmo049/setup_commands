@@ -5,6 +5,9 @@ ln -s $dotfile_dir/vimrc ~/.vimrc
 unlink ~/.bashrc_custom
 ln -s $dotfile_dir/bashrc_custom ~/.bashrc_custom
 
+unlink ~/.config/nvim/init.vim
+ln -s $dotfile_dir/neovim_init ~/.config/nvim/init.vim
+
 ##make sure bashrc_custom is sourced
 source_to_add="source ~/.bashrc_custom"
 grep -q "$source_to_add" ~/.bashrc

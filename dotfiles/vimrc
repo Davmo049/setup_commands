@@ -1,9 +1,69 @@
+set paste                      " Paste unmodified
 
-set mouse=a
-set number
+set smarttab                   " <TAB> inserts 'shiftwidth' spaces
 
-nnoremap <left> <C-w><left>
-nnoremap <right> <C-w><right>
-nnoremap <up> <C-w><up>
-nnoremap <down> <C-w><down>
+set ignorecase                 " ignore case in general when searching
+set smartcase                  " do not ignore case when uppercase letters are in the search
+set wildmenu                   " menu line with autocomplete options
 
+" how much to indent for different languages
+autocmd FileType c setlocal shiftwidth=3
+autocmd FileType c setlocal tabstop=3
+autocmd FileType cpp setlocal shiftwidth=3
+autocmd FileType cpp setlocal tabstop=3
+autocmd FileType py setlocal shiftwidth=4
+autocmd FileType py setlocal tabstop=4
+
+set expandtab                  " use spaces instead of tab
+set autoindent                 " automatically set the indent when creatig lines
+
+set cino=(0,Ws                 " Align output after parantheses but not if ( is followed by whitespace
+
+set list                       " show whitespace
+set hlsearch                   " highlight search
+set mouse=a                    " enable mouse
+set number                     " show line number
+set clipboard+=unnamed         " use the system clipboard
+set go+=a                      " Visual selection automatically copied to the clipboard
+
+"remap arrow keys to switch splits
+nnoremap <Left> <c-w><c-h>
+nnoremap <Right> <c-w><c-l>
+nnoremap <Up> <c-w><c-k>
+nnoremap <Down> <c-w><c-j>
+noremap <Space> <Nop>
+
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+" Install vim-plugs before:
+" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+" https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" PlugUpdate to install/update plugins
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+"Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+Plug 'ludovicchabant/vim-gutentags'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'honza/vim-snippets'             " Snippets 
+Plug 'SirVer/ultisnips'               " Snippets engine 
+
+call plug#end()
+
+" disable tab key usage in ycm
+let g:ycm_key_list_select_completion = [] 
+
+let g:ycm_confirm_extra_conf = 0
+
+let mapleader="\<Space>"
+
+"re-souce vim
+nnoremap <leader>s :source ~/.vimrc<ENTER>
+"copy all in file
+nnoremap <leader>ca :%y+<ENTER>
