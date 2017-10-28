@@ -1,12 +1,33 @@
-" auto-install vim-plug
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-   autocmd VimEnter * PlugInstall
-endif
+set smarttab                   " <TAB> inserts 'shiftwidth' spaces
+set ignorecase                 " ignore case in general when searching
+set smartcase                  " do not ignore case when uppercase letters are in the search
+set wildmenu                   " menu line with autocomplete options
 
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vimrc
+set tabstop=4
+set shiftwidth=4
+
+" how much to indent for different languages
+autocmd FileType c setlocal shiftwidth=4
+autocmd FileType c setlocal tabstop=4
+autocmd FileType cpp setlocal shiftwidth=4
+autocmd FileType cpp setlocal tabstop=4
+autocmd FileType py setlocal shiftwidth=4
+autocmd FileType py setlocal tabstop=4
+
+set expandtab                  " use spaces instead of tab
+set autoindent                 " automatically set the indent when creatig lines
+
+set cino=(0,Ws                 " Align output after parantheses but not if ( is followed by whitespace
+
+set list                       " show whitespace
+set hlsearch                   " highlight search
+set mouse=a                    " enable mouse
+set number                     " show line number
+set clipboard+=unnamed         " use the system clipboard
+set go+=a                      " Visual selection automatically copied to the clipboard
+
+
+let mapleader="\<Space>"
 
 tnoremap <Esc> <C-\><C-n>
 nnoremap <leader>t :terminal<ENTER>
@@ -14,3 +35,55 @@ nnoremap <leader>s :source ~/.config/nvim/init.vim<ENTER>
 nnoremap <leader>m :split<ENTER>
 nnoremap <leader>n :vsplit<ENTER>
 
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-l> <c-w><c-l>
+
+nnoremap <c-p> :call fzf#run({'source': 'git ls-files', 'sink': 'e', 'left': '50%'})<ENTER>
+
+inoremap <special> jk <Esc>
+
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+noremap <Space> <Nop>
+
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+   autocmd VimEnter * PlugInstall
+endif
+
+
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+" Install vim-plugs before:
+" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" PlugUpdate to install/update plugins
+call plug#begin('~/.vim/plugged')
+" Make sure you use single quotes
+
+"Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+Plug 'ludovicchabant/vim-gutentags'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'honza/vim-snippets'             " Snippets 
+Plug 'SirVer/ultisnips'               " Snippets engine 
+
+call plug#end()
+
+" disable tab key usage in ycm
+let g:ycm_key_list_select_completion = []
+
+let g:ycm_confirm_extra_conf = 0

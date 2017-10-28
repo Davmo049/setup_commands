@@ -1,4 +1,6 @@
-dotfile_dir="/media/data/setup_commands/dotfiles"
+#!/bin/bash
+data_dir="/media/data"
+dotfile_dir="${data_dir}/setup_commands/dotfiles"
 
 unlink ~/.vimrc
 ln -s $dotfile_dir/vimrc ~/.vimrc
@@ -19,3 +21,6 @@ unlink ~/.gitconfig
 unlink ~/.gitignore
 ln -s $dotfile_dir/gitconfig ~/.gitconfig
 ln -s $dotfile_dir/gitignore ~/.gitignore
+
+unlink ~/.ssh
+ln -s /ssh ~/.ssh
